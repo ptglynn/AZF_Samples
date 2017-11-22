@@ -128,7 +128,7 @@
                     "properties": {
                         "packageUri": "[concat('https://',parameters('codeStorageAccount'), '.blob.core.windows.net/', parameters('codeStorageContainer'), '/', parameters('codeZipFile'))]",
                         "dbType": "None",
-                        "connectionString": "parameters('connectionString')"
+                        "connectionString": ""
                     }
                 }
 			]
