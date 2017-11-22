@@ -39,6 +39,12 @@
                 "description": "Name of Zip file to deploy"
             }
         },
+        "connectionString": {
+            "type": "string",
+            "metadata": {
+                "description": "String to connect to the storage account"
+            }
+        },
         "connectionName": {
             "type": "string",
             "metadata": {
@@ -122,7 +128,7 @@
                     "properties": {
                         "packageUri": "[concat('https://',parameters('codeStorageAccount'), '.blob.core.windows.net/', parameters('codeStorageContainer'), '/', parameters('codeZipFile'))]",
                         "dbType": "None",
-                        "connectionString": ""
+                        "connectionString": "parameters('connectionString')"
                     }
                 }
 			]
