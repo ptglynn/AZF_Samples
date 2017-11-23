@@ -38,18 +38,6 @@
             "metadata": {
                 "description": "Name of Zip file to deploy"
             }
-        },
-        "connectionName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of connection to storage account for this function"
-            }
-        },
-        "connectionValue": {
-            "type": "string",
-            "metadata": {
-                "description": "Value of connection to storage account for this function"
-            }
         }
     },
     "variables": {
@@ -105,8 +93,7 @@
                     "properties": {
                         "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1,';')]", 
                         "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1,';')]", 
-                        "FUNCTIONS_EXTENSION_VERSION": "latest",
-                        "[parameters('connectionName')]": "[parameters('connectionValue')]"
+                        "FUNCTIONS_EXTENSION_VERSION": "~1",
                     }
                 },
                 {
