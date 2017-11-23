@@ -20,6 +20,12 @@
                 "description": "Storage Account Name for where the zip file to deploy resides"
             }
         },
+	"codeStorageAccountSAS": {
+            "type": "string",
+            "metadata": {
+                "description": "SAS String to access the storage blob"
+            }
+        },
         "codeStorageContainer": {
             "type": "string",
             "metadata": {
@@ -103,7 +109,7 @@
                         "displayName": "webdeploy"
                     },
                     "properties": {
-                        "packageUri": "[concat('https://',parameters('codeStorageAccount'), '.blob.core.windows.net/', parameters('codeStorageContainer'), '/', parameters('codeZipFile'))]",
+                        "packageUri": "[concat('https://',parameters('codeStorageAccount'), '.blob.core.windows.net/', parameters('codeStorageContainer'), '/', parameters('codeZipFile'),parameters('codeStorageAccountSAS'))]",
                         "dbType": "None",
                         "connectionString": ""
                     }
