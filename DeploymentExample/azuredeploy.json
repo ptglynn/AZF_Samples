@@ -8,6 +8,12 @@
             "description": "This is the name of the your storage account. Enter up to 20 characters, lower case and numbers ONLY"
             }
         },
+        "functionName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the Azure Function being Deployed"
+            }
+        },
         "codeStorageAccount": {
             "type": "string",
             "metadata": {
@@ -29,9 +35,9 @@
     },
     "variables": {
         "unqString" : "[substring(uniqueString(resourceGroup().id), 0, 4)]",
-        "functionAppName": "[concat('Block-XFF-',variables('unqString'))]",
-        "hostingPlanName": "Block-XFF-ASP",
-        "storageAccountName": "[concat(parameters('StorageAccountName'),variables('unqString'))]",
+        "functionAppName": "[concat(parameters('functionName'),'-FX-',variables('unqString'))]",
+        "hostingPlanName": "[concat(parameters('functionName'),'-HP-',variables('unqString'))]",
+        "strAccountName": "[concat(variables('strAccountName'),variables('unqString'))]",
         "storageAccountType": "Standard_LRS"
     },
     "resources": [
@@ -67,7 +73,7 @@
             },
             "dependsOn": [
                 "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
-                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('strAccountName'))]"
             ],
             "resources": [
                 {
@@ -76,13 +82,13 @@
                     "type": "config",
                     "dependsOn": [
                         "[resourceId('Microsoft.Web/sites', variables('functionAppName'))]",
-                        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
+                        "[resourceId('Microsoft.Storage/storageAccounts', variables('strAccountName'))]",
                         "[concat('Microsoft.Web/sites/', variables('functionAppName'), '/Extensions/MSDeploy')]"
                     ],
                     "properties": {
-                        "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1,';')]", 
-                        "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2015-05-01-preview').key1,';')]", 
-                        "FUNCTIONS_EXTENSION_VERSION": "~1",
+                        "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('strAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('strAccountName')), '2015-05-01-preview').key1,';')]", 
+                        "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('strAccountName'),';AccountKey=',listkeys(resourceId('Microsoft.Storage/storageAccounts', variables('strAccountName')), '2015-05-01-preview').key1,';')]", 
+                        "FUNCTIONS_EXTENSION_VERSION": "~1"
                     }
                 },
                 {
