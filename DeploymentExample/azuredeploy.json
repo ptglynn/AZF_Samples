@@ -22,10 +22,10 @@
         }
     },
     "variables": {
-        "unqString" : "[substring(uniqueString(resourceGroup().id), 0, 4)]",
-        "functionAppName": "[concat('Block-XFF-',variables('unqString')]",
+        "unqString" : "uniqueString(resourceGroup().id)",
+        "functionAppName": "[concat('Block-XFF-',variables('unqString'))]",
         "hostingPlanName": "[concat('asp',variables('functionAppName'))]",
-        "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'azfunctions')]",
+        "storageAccountName": "[concat(variables('unqString'), 'azfunctions')]",
         "storageAccountType": "Standard_LRS"
     },
     "resources": [
