@@ -2,6 +2,12 @@
     "$schema": "http://schemas.management.azure.com/schemas/2015-01-01-preview/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "StorageAccountName": {
+            "type": "string",
+            "metadata": {
+            "description": "This is the name of the your storage account. Enter up to 20 characters, lower case and numbers ONLY"
+            }
+        },
         "codeStorageAccount": {
             "type": "string",
             "metadata": {
@@ -22,10 +28,10 @@
         }
     },
     "variables": {
-        "unqString" : "uniqueString(resourceGroup().id)",
+        "unqString" : "[substring(uniqueString(resourceGroup().id), 0, 4)]",
         "functionAppName": "[concat('Block-XFF-',variables('unqString'))]",
         "hostingPlanName": "[concat('asp',variables('functionAppName'))]",
-        "storageAccountName": "[concat(variables('unqString'), 'azfunctions')]",
+        "storageAccountName": "[concat(parameters('StorageAccountName'),variables('unqString'))]",
         "storageAccountType": "Standard_LRS"
     },
     "resources": [
