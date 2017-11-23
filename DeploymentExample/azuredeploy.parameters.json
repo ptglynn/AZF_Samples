@@ -1,27 +1,42 @@
 {
-  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "appName": {
-      "value": ""
-    },
-    "storageAccountType": {
-      "value": "Standard_LRS"
-    },
-    "codeStorageAccount": {
-      "value": ""
-    },
-    "codeStorageContainer": {
-      "value": ""
-    },
-    "codeZipFile": {
-      "value": ""
-    },
-    "connectionName": {
-      "value": ""
-    },
-    "connectionValue": {
-      "value": "DefaultEndpointsProtocol=https;AccountName=;AccountKey="
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "This is the name of the your storage account. Enter up to 20 characters, lower case and numbers ONLY"
+            }
+        },
+        "functionName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the Azure Function being Deployed"
+            }
+        },
+        "codeStorageAccount": {
+            "type": "string",
+            "metadata": {
+                "description": "Storage Account Name for where the zip file to deploy resides"
+            }
+        },
+        "codeStorageAccountSAS": {
+            "type": "string",
+            "metadata": {
+                "description": "SAS String to access the storage blob"
+            }
+        },
+        "codeStorageContainer": {
+            "type": "string",
+            "metadata": {
+                "description": "Container where the zip file resides"
+            }
+        },
+        "codeZipFile": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Zip file to deploy"
+            }
+        }
     }
-  }
 }
