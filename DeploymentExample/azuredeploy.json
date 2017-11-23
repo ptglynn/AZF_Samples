@@ -30,7 +30,7 @@
     "variables": {
         "unqString" : "[substring(uniqueString(resourceGroup().id), 0, 4)]",
         "functionAppName": "[concat('Block-XFF-',variables('unqString'))]",
-        "hostingPlanName": "variables('functionAppName')",
+        "hostingPlanName": "[concat('Block-XFF-',variables('unqString'))]",
         "storageAccountName": "[concat(parameters('StorageAccountName'),variables('unqString'))]",
         "storageAccountType": "Standard_LRS"
     },
