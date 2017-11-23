@@ -2,25 +2,6 @@
     "$schema": "http://schemas.management.azure.com/schemas/2015-01-01-preview/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "appName": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the function app that you wish to create."
-            }
-        },
-        "storageAccountType": {
-            "type": "string",
-            "defaultValue": "Standard_LRS",
-            "allowedValues": [
-                "Standard_LRS",
-                "Standard_GRS",
-                "Standard_ZRS",
-                "Premium_LRS"
-            ],
-            "metadata": {
-                "description": "Storage Account type"
-            }
-        },
         "codeStorageAccount": {
             "type": "string",
             "metadata": {
@@ -41,9 +22,11 @@
         }
     },
     "variables": {
-        "functionAppName": "[parameters('appName')]",
-        "hostingPlanName": "[concat('asp',parameters('appName'))]",
-        "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'azfunctions')]"
+        "unqString" : "[substring(uniqueString(resourceGroup().id), 0, 4)]",
+        "functionAppName": "[concat('Block-XFF-',variables('unqString')]",
+        "hostingPlanName": "[concat('asp',variables('functionAppName'))]",
+        "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'azfunctions')]",
+        "storageAccountType": "Standard_LRS"
     },
     "resources": [
         {
