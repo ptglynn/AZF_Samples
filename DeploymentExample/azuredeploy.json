@@ -1,5 +1,5 @@
 {
-    "$schema": "http://schemas.management.azure.com/schemas/2015-04-01-preview/deploymentTemplate.json#",
+    "$schema": "http://schemas.management.azure.com/schemas/2015-01-01-preview/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "StorageAccountName": {
@@ -30,7 +30,7 @@
     "variables": {
         "unqString" : "[substring(uniqueString(resourceGroup().id), 0, 4)]",
         "functionAppName": "[concat('Block-XFF-',variables('unqString'))]",
-        "hostingPlanName": "[concat('Block-XFF-',variables('unqString'))]",
+        "hostingPlanName": "Block-XFF-ASP",
         "storageAccountName": "[concat(parameters('StorageAccountName'),variables('unqString'))]",
         "storageAccountType": "Standard_LRS"
     },
